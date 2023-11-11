@@ -31,8 +31,60 @@ export default class Game {
         this.grid = grid
     }
 
-    newMove(action, row, col) {
+    // //automated solving, cannot pause on steps
+    // solveGrid(grid) {
+    //     let userGrid = grid.getUserGrid()
+    //     let answerGrid = grid.getAnswerGrid()
+    //     let blanks = grid.getBlanks()
+    //     let mines = grid.getMines()
+    //     let success = 0
+
+
+    //     while (blanks > mines && success !== GAMEEND) {
+    //         if (userGrid.getBlanks() === grid.getSize() * grid.getSize()) { //first move
+    //             this.safeFirstClick(0, 0) //always start with top left corner
+    //         }
+    //         success = game.solveNewMove(grid)
+    //         grid.printGrid(userGrid)
+    //     }
+
+    //     if (success === GAMEEND) {
+    //         console.log("LOSS")
+    //     } else {
+    //         console.log("WIN")
+    //     }
+    // }
+
+    // solveNewMove(grid) {
+    //     let userGrid = grid.getUserGrid()
+    //     let answerGrid = grid.getAnswerGrid()
+
+    //     //scan for patterns, if found, execute and display
+    //     //fulfill and chord touched cells
+    //     let touchedCells = game.patternScan()
+
+
+    //     //if can't find patterns, calculate probability
+    // }
+
+    // patternScan() {
+    //     let touchedCells = []
+    //     touchedCells.push(game.oneCorner())
+    //     return touchedCells
+    // }
+
+    // oneCorner() {
+    //     let grid = this.getGrid()
+    // }
+
+    playNewMove(action, row, col) {
         let grid = this.getGrid()
+        let userGrid = grid.getUserGrid()
+
+        if (userGrid.getBlanks() === grid.getSize() * grid.getSize()) { //first move
+            this.safeFirstClick(row, column)
+        }
+
         switch (action) {
             case "click":
                 return grid.click(row, col);
@@ -54,6 +106,7 @@ export default class Game {
             let newGrid = new Grid(difficulty);
             grid.setAnswerGrid(newGrid.getAnswerGrid());
         }
+        game.setGrid(grid)
     }
 
     //when # of blanks == minecount, we know the bombs are there so we can flag them
