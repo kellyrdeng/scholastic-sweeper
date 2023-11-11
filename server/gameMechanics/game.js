@@ -1,4 +1,5 @@
 /*This class starts a game and runs it until a mine is hit or all mines are found*/
+import Grid from './grid.js'
 
 const MINE = -1 
 const FLAG = -2 
@@ -12,18 +13,22 @@ const OFFSET = [[-1, -1], [-1, 0], [-1, 1], //for neighbors of a cell
                 [0,  -1],          [0,  1],
                 [1,  -1], [1,  0], [1,  1]] 
 
-class Game {
+export default class Game {
 
-    constructor() { //initialize new game by prompting user for difficulty
-        let difficulty = prompt("Type beginner, intermediate, or expert to select difficulty:")
+    constructor(difficulty) { //initialize new game by prompting user for difficulty
+        /*let difficulty = prompt("Type beginner, intermediate, or expert to select difficulty:")
         while (difficulty != "beginner"|| difficulty != "intermediate" || difficulty != "expert") {
             difficulty = prompt("Please type either beginner, intermediate, or expert.:")
-        }
+        }*/
         this.grid = new Grid(difficulty)
     }
 
     getGrid() {
         return this.grid
+    }
+
+    setGrid(grid) { //for testing
+        this.grid = grid
     }
 
     newMove(action, row, col) {
@@ -52,32 +57,51 @@ class Game {
     }
 
     //when # of blanks == minecount, we know the bombs are there so we can flag them
-    // fulfill(i, j) {
-    //     let grid = this.getGrid()
-    //     let answerGrid = this.getAnswerGrid()
-    //     let userGrid = this.getUserGrid()
+    fulfill(i, j) {
+        let grid = this.getGrid()
+        let answerGrid = grid.getAnswerGrid()
+        let userGrid = grid.getUserGrid()
 
-    //     blanks = grid.countTarget(i, j, userGrid, BLANK)
-    //     flags = grid.countTarget(i, j, answerGrid, FLAG) //number of flags the user has places
+        let blanks = grid.countTarget(i, j, userGrid, BLANK)
+        let flags = grid.countTarget(i, j, answerGrid, FLAG) //number of flags the user has places
 
-    //     if (blanks !== answerGrid[i][j] - flags) { //cannot fulfill
-    //         return
-    //     }
+        if (blanks !== answerGrid[i][j] - flags) { //cannot fulfill
+            return
+        }
 
-    //     let touchedCells = Set()
+        let touchedCells = new Set()
     
-    //     //fulfill by placing flags on all the blanks
-    //     for (let p = 0; p < OFFSET.length; p++) {
-    //         let point = OFFSET[p]
-    //         let row = i + point[0]
-    //         let col = j + point[1]
-
-    //         if (!grid.outOfBounds(row, col) && userGrid[row][col] == BLANK) { //flag blank if not out of bounds
-    //             grid.setUserGridCell(row, col, FLAG)
-    //             for (let p = 0; p < OFFSET.length; p++) { //add its neighbors to touchedCells
-                    
-    //             }
-    //         }
-    //     }
-    // }
+        //fulfill by placing flags on all the blanks
+        let neighbors = grid.getNeighbors(i, j)
+        for (let p = 0; p < neighbors.length; p ++) {
+            let row = neighbors[p][0]
+            let col = neighbors[p][1]
+            if (!grid.outOfBounds(row, col) && userGrid[row][col] == BLANK) { //flag blank if not out of bounds
+                grid.setUserGridCell(row, col, FLAG)
+                
+                //add neighbors of flag to touchedCells
+                let touchedNeighbors = grid.getNeighbors(row, col)
+                for (let d = 0; d < touchedNeighbors.length; d++) {
+                    touchedCells.add(touchedNeighbors[d])
+                }
+            }
+        }
+        return touchedCells
+    }
 }
+
+let game = new Game("test") 
+
+let grid = new Grid("test") 
+grid.setUserGrid([[1,       1,   BLANK], 
+                  [1,     BLANK, BLANK],
+                  [BLANK, BLANK, BLANK]])
+grid.setAnswerGrid([[1,   1,  1], 
+                    [1, MINE, 1],
+                    [1,   1,  1]])
+game.setGrid(grid)
+
+grid.printGrid("answer")
+//grid.click(0, 0)
+console.log(game.fulfill(0, 0))
+grid.printGrid("user")

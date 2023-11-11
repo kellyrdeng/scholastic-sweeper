@@ -10,7 +10,7 @@ const OFFSET = [[-1, -1], [-1, 0], [-1, 1],
                 [0,  -1],          [0,  1],
                 [1,  -1], [1,  0], [1,  1]] 
 
-class Grid {
+export default class Grid {
 
     constructor(difficulty) {
         this.difficulty = difficulty
@@ -77,6 +77,10 @@ class Grid {
 
     setUserGrid(userGrid) {
         this.userGrid = userGrid 
+    }
+
+    setAnswerGrid(answerGrid) {
+        this.answerGrid = answerGrid
     }
 
     decrementBlanks() {
@@ -318,9 +322,23 @@ class Grid {
     outOfBounds(row, col) {
         return row < 0 || col < 0 || row >= this.getAnswerGrid().length || col >= this.getAnswerGrid().length;
     }
+
+    getNeighbors(i, j) {
+        let neighbors = []
+        for (let p = 0; p < OFFSET.length; p++) {
+            let point = OFFSET[p]
+            let row = i + point[0]
+            let col = j + point[1]
+
+            if (!this.outOfBounds(row, col)) {
+                neighbors.push([row, col])
+            }
+        }
+        return neighbors
+    }
 }
 
-let grid = new Grid("beginner") 
-grid.printGrid("answer") 
-grid.click(0, 0)
-grid.printGrid("user") 
+//let grid = new Grid("beginner") 
+//grid.printGrid("answer") 
+// grid.click(0, 0)
+// grid.printGrid("user")
