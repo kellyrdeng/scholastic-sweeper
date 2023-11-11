@@ -13,6 +13,7 @@ const OFFSET = [[-1, -1], [-1, 0], [-1, 1],
 class Grid {
 
     constructor(difficulty) {
+        this.difficulty = difficulty
         switch (difficulty) {
             case "beginner":
                 this.size = 9;
@@ -62,8 +63,12 @@ class Grid {
         return this.mines 
     }
 
-    getBlanks() {
+    getBlanks() { //current num of blanks (usergrid)
         return this.blanks 
+    }
+
+    getDifficulty() {
+        return this.difficulty
     }
 
     setBlanks(blanks) {
