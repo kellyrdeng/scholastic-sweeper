@@ -10,9 +10,10 @@ const OFFSET = [[-1, -1], [-1, 0], [-1, 1],
                 [0,  -1],          [0,  1],
                 [1,  -1], [1,  0], [1,  1]] 
 
-class Grid {
+export default class Grid {
 
     constructor(difficulty) {
+        this.difficulty = difficulty
         switch (difficulty) {
             case "beginner":
                 this.size = 9;
@@ -62,8 +63,12 @@ class Grid {
         return this.mines 
     }
 
-    getBlanks() {
+    getBlanks() { //current num of blanks (usergrid)
         return this.blanks 
+    }
+
+    getDifficulty() {
+        return this.difficulty
     }
 
     setBlanks(blanks) {
@@ -74,11 +79,15 @@ class Grid {
         this.userGrid = userGrid 
     }
 
+    setAnswerGrid(answerGrid) {
+        this.answerGrid = answerGrid
+    }
+
     decrementBlanks() {
         this.blanks = this.blanks - 1 
     }
 
-    setUserGrid(row, column, value) {
+    setUserGridCell(row, column, value) {
         this.userGrid[row][column] = value 
     }
 
@@ -128,7 +137,7 @@ class Grid {
 
         switch (answerCellValue) {
             case MINE:
-                this.setUserGrid(row, col, MINE)
+                this.setUserGridCell(row, col, MINE)
                 return GAMEEND
 
             case 0:
@@ -142,7 +151,7 @@ class Grid {
                 if (this.getUserGrid()[row][col] === answerCellValue) { //already been clicked/revealed
                     return this.chord(row, col)
                 } else { 
-                    this.setUserGrid(row, col, answerCellValue) //reveal minecount
+                    this.setUserGridCell(row, col, answerCellValue) //reveal minecount
                     this.decrementBlanks()
                     return SUCCESS
                 }
@@ -160,13 +169,13 @@ class Grid {
 
         switch (userCellValue) {
             case FLAG: //if it was already a flag, then unflg it
-                this.setUserGrid(row, col, BLANK)
+                this.setUserGridCell(row, col, BLANK)
                 return SUCCESS
             
             case MINE: //same as blank
 
             case BLANK: //set a flag
-                this.setUserGrid(row, col, FLAG)
+                this.setUserGridCell(row, col, FLAG)
                 return SUCCESS
 
             default: //minecount already revealed, can't flag over a revealed cell so do nothing
@@ -221,7 +230,7 @@ class Grid {
         while (queue.length > 0) {
             let cur = queue.shift() //dequeue a 2 item arr representing next cell to process
             let minecount = answerGrid[cur[0]][cur[1]]
-            this.setUserGrid(cur[0], cur[1], minecount) //reveal cell
+            this.setUserGridCell(cur[0], cur[1], minecount) //reveal cell
 
             if (minecount === 0) {
                 for (let p = 0; p < OFFSET.length; p++) { //process neighbors of cur
@@ -313,9 +322,23 @@ class Grid {
     outOfBounds(row, col) {
         return row < 0 || col < 0 || row >= this.getAnswerGrid().length || col >= this.getAnswerGrid().length;
     }
+
+    getNeighbors(i, j) {
+        let neighbors = []
+        for (let p = 0; p < OFFSET.length; p++) {
+            let point = OFFSET[p]
+            let row = i + point[0]
+            let col = j + point[1]
+
+            if (!this.outOfBounds(row, col)) {
+                neighbors.push([row, col])
+            }
+        }
+        return neighbors
+    }
 }
 
-// let grid = new Grid("beginner") 
-// grid.printGrid("answer") 
+//let grid = new Grid("beginner") 
+//grid.printGrid("answer") 
 // grid.click(0, 0)
-// grid.printGrid("user") 
+// grid.printGrid("user")
