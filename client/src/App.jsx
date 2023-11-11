@@ -1,7 +1,19 @@
 import './App.css'
 
-function App() {
-  return <h1 className='bg-red-200'>HI: TESTING</h1>
+function Header() {
+  return (
+    <div className="main_header">
+      <h1 className='icon'Scholastic Sweeper></h1>
+      <h2>About</h2>
+      <h3>Play</h3>
+      <h4>Tutorial</h4>
+      <img src="logo2.png"className="Schol_logo"></img>
+      <img src="flaglogo1.png"></img>
+      <div style="width: 100%; height: 100%; position: relative">
+    
+</div>
+    </div>
+  )
 }
 
-export default App
+export default Header
