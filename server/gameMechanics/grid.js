@@ -7,16 +7,38 @@ const OFFSET = [[-1, -1], [-1, 0], [-1, 1],
 
 class Grid {
 
-    constructor() {
-        this.size = 9 
-        this.blanks = 81 
-        this.mines = 10 
+    constructor(difficulty) {
+        switch (difficulty) {
+            case "beginner":
+                this.size = 9;
+                this.blanks = 81;
+                this.mines = 10;
+                break;
+            case "intermediate":
+                this.size = 16;
+                this.blanks = 256;
+                this.mines = 40;
+                break;
+            case "expert":
+                this.size = 24;
+                this.blanks = 576;
+                this.mines = 99;
+                break;
+            case "test":
+                this.size = 3;
+                this.blanks = 9;
+                this.mines = 2;
+                break;
+            default:
+                this.size = 9;
+                this.blanks = 81;
+                this.mines = 10;
+        }
 
-        this.answerGrid = new Array(9).fill(0).map(() => new Array(9).fill(0)) 
-        this.answerGrid = this.generateMines()
-        
-        //this.answerGrid = this.fillMinecount()
-        this.userGrid = new Array(9).fill(0).map(() => new Array(9).fill(-3)) 
+        this.answerGrid = new Array(this.size).fill(0).map(() => new Array(this.size).fill(0)) 
+        this.generateMines()
+        this.fillMinecount()
+        this.userGrid = new Array(this.size).fill(0).map(() => new Array(this.size).fill(BLANK)) 
     }
 
     getAnswerGrid() {
@@ -71,7 +93,19 @@ class Grid {
                 this.answerGrid[row][col] = MINE 
             }
         }
-        return this.answerGrid
+    }
+
+    fillMinecount() {
+        let answerGrid = this.getAnswerGrid()
+        
+        for (let i = 0; i < answerGrid.length; i++) {
+            for (let j = 0; j < answerGrid.length; j++) {
+                if (answerGrid[i][j] == -1) {
+                    continue;
+                }
+                answerGrid[i][j] = this.countTarget(i, j, answerGrid, -1)
+            }
+        }
     }
 
     //everything above is for grid generation
@@ -114,7 +148,32 @@ class Grid {
             console.log(row) 
         }
     }
+
+    //counts the number of immediate neighbors with mines OR flags (depending on the toCount var passed in)
+    //for the point (i, j) using the offset const
+    countTarget(i, j, grid, target) {
+        let minecount = 0
+
+        for (let p = 0; p < OFFSET.length; p++) {
+            let point = OFFSET[p]
+            let row = i + point[0]
+            let col = j+ point[1]
+
+            if (this.outOfBounds(row, col)) {
+                continue
+            }
+
+            if (grid[row][col] === target) {
+                minecount++
+            }
+        }
+        return minecount
+    }
+
+    outOfBounds(row, col) {
+        return row < 0 || col < 0 || row >= this.getAnswerGrid().length || col >= this.getAnswerGrid().length;
+    }
 }
 
-//let grid = new Grid() 
-//grid.printGrid("answer") 
+let grid = new Grid("beginner") 
+grid.printGrid("answer") 
