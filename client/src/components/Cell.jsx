@@ -4,7 +4,7 @@ import flag from "../assets/flag.svg";
 import axios from "axios";
 import gameState from "../assets/gameState";
 
-export default function Cell({ grid, pos, tutorialCell }) {
+export default function Cell({ grid, pos, tutorialCell, playState=null, setPlayState=null }) {
     // tutorialCell ? console.log(tutorialCell, pos) : null
 	const activeStyle =
 		tutorialCell && tutorialCell[0] === pos[0] && tutorialCell[1] === pos[1]
@@ -46,19 +46,17 @@ export default function Cell({ grid, pos, tutorialCell }) {
 		if (event.button === 0) {
 			//left button
 			await axios.post("http://localhost:3000/play", {
-				gameState: [],
-				answerGrid: [],
-				coords: [],
-				action: "leftclick",
+                ...playState,
+                pos: pos,
+				action: "left",
 			});
 		}
 		if (event.button === 2) {
 			//right button
 			await axios.post("http://localhost:3000/play", {
-				gameState: [],
-				answerGrid: [],
-				coords: [],
-				action: "rightclick",
+                ...playState,
+                pos: pos,
+				action: "right",
 			});
 		}
 	};

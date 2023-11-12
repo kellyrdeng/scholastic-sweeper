@@ -27,8 +27,13 @@ app.get("/tutorial", (req, res) => {
   res.status(200).json(tutorial)
 })
 
-app.post("/play", (req, res) => {
+app.get("/play", (req, res) => {
   res.status(200).send(new Game())
+})
+
+app.post("/play", (req, res) => {
+  console.log(req.body)
+  // res.status(200).send(new Game())
 })
 
 app.get("/api", (req, res) => {

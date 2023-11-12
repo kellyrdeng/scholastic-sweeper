@@ -28,7 +28,6 @@ export default function App() {
 			<BrowserRouter>
 				<Routes>
 					<Route path="/about" element={<About />} />
-					<Route path="/tutorial" element={<Tutorial />} />
 					<Route path="/" element={<Home />} />
 					<Route path="/tutorial" element={<Tutorial tutorialState={tutorialState} setTutorialState={setTutorialState}/>} />
 					<Route path="/play" element={<Play />} />

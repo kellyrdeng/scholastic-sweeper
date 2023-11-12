@@ -5,7 +5,7 @@ export default function Tutorial({tutorialState, setTutorialState}) {
   const tutorial = tutorialState.tutorial
   let currStep = tutorialState.currStep
   let currTutorial = tutorial[currStep]
-  console.log(currTutorial.coords)
+  
   const handleBackClick = (event) => {
     if(currStep === 0) return
     setTutorialState({...tutorialState, currStep: currStep - 1})
