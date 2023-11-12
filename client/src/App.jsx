@@ -1,11 +1,13 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Grid from "./components/Grid";
+import Header from "./components/Header";
 
 export default function App() {
 	return (
 		<div className="h-screen w-full text-base">
-			<BrowserRouter>
+			<Header/>
+      <BrowserRouter>
 				<Routes>
 					<Route path="/grid" element={<Grid />} />
 				</Routes>
