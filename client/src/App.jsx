@@ -1,19 +1,15 @@
-import './App.css'
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Grid from "./components/grid";
 
-function Header() {
-  return (
-    <div className="main_header">
-      <h1 className='icon'Scholastic Sweeper></h1>
-      <h2>About</h2>
-      <h3>Play</h3>
-      <h4>Tutorial</h4>
-      <img src="logo2.png"className="Schol_logo"></img>
-      <img src="flaglogo1.png"></img>
-      <div style="width: 100%; height: 100%; position: relative">
-    
-</div>
-    </div>
-  )
+export default function App() {
+	return (
+		<div className="h-screen w-full text-base">
+			<BrowserRouter>
+				<Routes>
+					<Route path="/grid" element={<Grid />} />
+				</Routes>
+			</BrowserRouter>
+		</div>
+	);
 }
-
-export default Header

@@ -196,6 +196,8 @@ export default class Grid {
             return SUCCESS
         }
 
+        let touchedCells = new Set()
+
         //mines all found, click all other neighbor cells (it will reveal nonzeros, do bfs for 0s)
         for (let p = 0; p < OFFSET.length; p++) {
             let point = OFFSET[p]
@@ -206,11 +208,14 @@ export default class Grid {
                 continue
             }
 
-            if (userGrid[row][column] === BLANK) {
+            if (!this.outOfBounds(row, column) && userGrid[row][column] === BLANK) {
                 let c = click(row, column) //can be const SUCCESS, UNSUCCESS, OR GAMEEND
                 if (c === GAMEEND) {
                     return c
                 }
+
+                let touchedNeighbors = this.getNeighbors(row, column)
+                touchedCells.add(touchedNeighbors)
             }
         }
         return SUCCESS
