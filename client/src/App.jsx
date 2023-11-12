@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import About from "./About";
 import MineGrid from "./components/MineGrid";
 import Header from "./components/Header";
+import Tutorial from "./Tutorial";
 
 export default function App() {
 	return (
@@ -10,8 +11,9 @@ export default function App() {
 			<Header />
 			<BrowserRouter>
 				<Routes>
-					<Route path="/About" element={<About />} />
+					<Route path="/about" element={<About />} />
 					<Route path="/grid" element={<MineGrid />} />
+					<Route path="/tutorial" element={<Tutorial />} />
 				</Routes>
 			</BrowserRouter>
 		</div>
