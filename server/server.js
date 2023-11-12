@@ -2,7 +2,7 @@
 
 const express = require("express");
 const cors = require("cors");
-const { default: Tutorial } = require("../client/src/Tutorial");
+const tutorial = require("./tutorial/tutorial")
 
 const PORT = process.env.PORT || 3000;
 
@@ -23,7 +23,7 @@ app.post("/", (req, res) => { //req sent from user to backend
 })
 
 app.get("/tutorial", (req, res) => {
-  res.status(200).json(Tutorial)
+  res.status(200).json(tutorial)
 })
 
 app.get("/api", (req, res) => {
