@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import About from "./About";
+import About from "./components/About";
 import Header from "./components/Header";
 import Tutorial from "./components/Tutorial";
+import Home from "./Home";
 import axios from "axios";
 import Play from "./components/Play";
 
@@ -27,6 +28,8 @@ export default function App() {
 			<BrowserRouter>
 				<Routes>
 					<Route path="/about" element={<About />} />
+					<Route path="/tutorial" element={<Tutorial />} />
+					<Route path="/" element={<Home />} />
 					<Route path="/tutorial" element={<Tutorial tutorialState={tutorialState} setTutorialState={setTutorialState}/>} />
 					<Route path="/play" element={<Play />} />
 				</Routes>
