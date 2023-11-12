@@ -14,6 +14,7 @@ export default function App() {
 					<Route path="/about" element={<About />} />
 					<Route path="/grid" element={<MineGrid />} />
 					<Route path="/tutorial" element={<Tutorial />} />
+					<Route path="/play" element={<Play />} />
 				</Routes>
 			</BrowserRouter>
 		</div>
