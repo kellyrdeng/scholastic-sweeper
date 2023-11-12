@@ -5,10 +5,11 @@ import axios from "axios";
 import gameState from "../assets/gameState";
 
 export default function Cell({ grid, pos, tutorialCell }) {
+    // tutorialCell ? console.log(tutorialCell, pos) : null
 	const activeStyle =
 		tutorialCell && tutorialCell[0] === pos[0] && tutorialCell[1] === pos[1]
-			? " border-yellow-500 border-4 border-box rounded-sm"
-			: "";
+			? " border-yellow-500 border-4 "
+			: " border-zinc-400 border-[1px] ";
 	const [rowIdx, colIdx] = pos;
 	const value = grid[rowIdx][colIdx];
 	let cell;
@@ -29,7 +30,7 @@ export default function Cell({ grid, pos, tutorialCell }) {
 			break;
 		default:
 			cell = (
-				<div className={"h-14 flex w-14 bg-transparent items-center justify-center text-red-700 border-[1px] border-zinc-400" + activeStyle}>
+				<div className={"h-14 flex w-14 bg-transparent items-center justify-center text-red-700" + activeStyle}>
 					<h1
 						className="font-mono font-extrabold text-4xl"
 						style={{ color: gameState.COLORS[value] }}
