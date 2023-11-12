@@ -6,7 +6,7 @@ export default function About() {
 	return (
 		<div>
 			<main id="About_Main"className="m-auto m-0" >
-				<h1 className="py-10 content-center font-serif"><b>About ScholasticSweeper:</b></h1>
+				<h1 className="py-5 content-center font-serif"><b>About ScholasticSweeper:</b></h1>
 				<p className ="font-mono leading-relaxed">
 				<span class="em">Why the interest in Minesweeper?</span> A game originally created by Microsoft in the 90s, 
 				Minesweeper has accumulated a devoted and skilled following. Through online forums and
@@ -23,6 +23,12 @@ export default function About() {
 						<figcaption>Minesweeper Online's version.</figcaption>
 					</figure>
 				</div>
+				<p className ="font-mono leading-relaxed"> 
+					We mainly drew inspiration for this project from one of our group members' 
+					obsession with minesweeper, but came to the realization that the game seemed too 
+					ancient to be of interest for many people. Being that there was this desire to 
+					teach people how to play and show how rewarding and fun it can be, the project was thus born... 
+				</p>
 				<p className ="font-mono leading-relaxed"> 
 				ScholasticSweeper is an educational minesweeper bot which provides step-by-step
 				tutorials to solving minesweeper grids for the purpose of learning. Players new
