@@ -1,5 +1,4 @@
 //json isBuilt and set every time theBoard updates (1 step)
-
 //initial grid of blanks
 
 const initial = {
@@ -402,3 +401,35 @@ const answer = {
              [ 0,  0,  0,  1,  2,  2,  2, -1,  1],
              [ 0,  0,  0,  0,  1, -1,  2,  1,  1]]
 }
+
+const tutorial = {
+    steps: [
+        step1,
+        step2,
+        step3,
+        step4,
+        step5,
+        step6,
+        step7,
+        step8,
+        step9,
+        step10,
+        step11,
+        step12,
+        step13,
+        step14,
+        step15,
+        step16,
+        step17,
+        step18,
+        step19,
+        step20,
+        step21,
+        step22,
+        step23,
+        step24,
+        step25
+    ]
+}
+
+module.exports = tutorial
