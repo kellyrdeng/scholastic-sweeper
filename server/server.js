@@ -4,6 +4,7 @@ const express = require("express");
 const cors = require("cors");
 const tutorial = require("./tutorial/tutorial");
 const Game = require("./gameMechanics/game");
+const UserGame = require("./gameMechanics/userGame")
 
 const PORT = process.env.PORT || 3000;
 
@@ -28,11 +29,18 @@ app.get("/tutorial", (req, res) => {
 })
 
 app.get("/play", (req, res) => {
-  res.status(200).send(new Game())
+  const result = new Game()
+  res.status(200).send(result.grid)
 })
 
 app.post("/play", (req, res) => {
-  console.log(req.body)
+  // console.log(req.body)
+  const userGameState = new UserGame(req.body.game)
+  // console.log(req.body.game)
+  // console.log(req.body.game.grid?.userGrid) 
+  // console.log(JSON.stringify({...userGameState.newMove(req.body.action, req.body.pos[0], req.body.pos[1], userGameState), game: userGameState}))
+  const result = {...userGameState.newMove(req.body.action, req.body.pos[0], req.body.pos[1], userGameState)}
+  res.status(200).send(result) 
   // res.status(200).send(new Game())
 })
 

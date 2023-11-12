@@ -8,15 +8,15 @@ export default function Play() {
 	useEffect(() => {
 		async function fetchTutorial() {
 			const game = await axios.get("http://localhost:3000/play");
-			// console.log(tutorial.data)
+			console.log(game.data)
 			localStorage.setItem("game", JSON.stringify(game.data.grid));
+			setPlayState(playState => ({...playState, game: game.data.grid,
+			gameGrid: game.data.userGrid, answer: game.data.answerGrid}))
 		}
 		fetchTutorial();
 	}, []);
 
 	const [playState, setPlayState] = useState({
-		gameGrid: JSON.parse(localStorage.getItem("game") ?? "{}").userGrid ?? [],
-		answer: JSON.parse(localStorage.getItem("game") ?? "{}").answerGrid ?? [],
 	});
 
 	return (

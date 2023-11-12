@@ -1,6 +1,7 @@
 import React from "react";
 import baseCell from "../assets/baseCell.svg";
 import flag from "../assets/flag.svg";
+import mine from "../assets/mine.svg";
 import axios from "axios";
 import gameState from "../assets/gameState";
 
@@ -26,7 +27,7 @@ export default function Cell({ grid, pos, tutorialCell, playState=null, setPlayS
 			);
 			break;
 		case gameState.MINE:
-			cell = <img className={"" + activeStyle} src={baseCell} />;
+			cell = <img className={"h-full w-full" + activeStyle} src={mine} />;
 			break;
 		default:
 			cell = (
@@ -43,22 +44,28 @@ export default function Cell({ grid, pos, tutorialCell, playState=null, setPlayS
 
 	const handleClick = async (event) => {
         event.preventDefault()
+        let result;
 		if (event.button === 0) {
 			//left button
-			await axios.post("http://localhost:3000/play", {
-                ...playState,
+			result = await axios.post("http://localhost:3000/play", {
+                // game: JSON.parse(localStorage.getItem("game")),  
+                game: playState.game,
                 pos: pos,
 				action: "left",
 			});
 		}
 		if (event.button === 2) {
 			//right button
-			await axios.post("http://localhost:3000/play", {
-                ...playState,
+			result = await axios.post("http://localhost:3000/play", {
+                game: playState.game,
                 pos: pos,
 				action: "right",
 			});
 		}
+        localStorage.setItem("game", JSON.stringify(result.data.game))
+        console.log(result.data.game)
+        setPlayState(playState => ({...playState, answer: result.data.game.grid.answerGrid, gameGrid: result.data.game.grid.userGrid, game: result.data.game.grid }))
+        console.log(playState)
 	};
 
 

@@ -1,6 +1,6 @@
 /*This class starts a game and runs it until a mine is hit or all mines are found*/
 
-const Grid = require("./grid.js")
+const UserGrid = require("./userGrid.js")
 
 const MINE = -1 
 const FLAG = -2 
@@ -15,22 +15,94 @@ const OFFSET = [[-1, -1], [-1, 0], [-1, 1], //for neighbors of a cell
                 [0,  -1],          [0,  1],
                 [1,  -1], [1,  0], [1,  1]] 
 
-class Game {
+class UserGame {
 
-    constructor(difficulty = "beginner") { 
-        this.grid = new Grid(difficulty)
+    constructor(game = null) { //initialize new game by prompting user for difficulty
+        /*let difficulty = prompt("Type beginner, intermediate, or expert to select difficulty:")
+        while (difficulty != "beginner"|| difficulty != "intermediate" || difficulty != "expert") {
+            difficulty = prompt("Please type either beginner, intermediate, or expert.:")
+        }*/
+        this.grid = game ? new UserGrid(game.difficulty, game.answerGrid, game.userGrid) : new UserGrid()
     }
 
     getGrid() {
         return this.grid
     }
 
-    //action can be right or left click
-    static newMove(action, row, col, userGrid) {
-        let grid = this.getGrid()
+    setGrid(grid) { //for testing
+        this.grid = grid
+    }
 
-        if (userGrid.getBlanks() === grid.getSize() * grid.getSize()) { //first move
-            grid.setAnswerGrid(this.safeFirstClick(row, col))
+    // //automated solving, cannot pause on steps
+    // solveGrid(grid) {
+    //     let userGrid = grid.getUserGrid()
+    //     let answerGrid = grid.getAnswerGrid()
+    //     let blanks = grid.getBlanks()
+    //     let mines = grid.getMines()
+    //     let success = 0
+
+
+    //     while (blanks > mines && success !== GAMEEND) {
+    //         if (userGrid.getBlanks() === grid.getSize() * grid.getSize()) { //first move
+    //             this.safeFirstClick(0, 0) //always start with top left corner
+    //         }
+    //         success = game.solveNewMove(grid)
+    //         grid.printGrid(userGrid)
+    //     }
+
+    //     if (success === GAMEEND) {
+    //         console.log("LOSS")
+    //     } else {
+    //         console.log("WIN")
+    //     }
+    // }
+
+    // solveNewMove(grid) {
+    //     let userGrid = grid.getUserGrid()
+    //     let answerGrid = grid.getAnswerGrid()
+
+    //     //scan for patterns, if found, execute and display
+    //     //fulfill and chord touched cells
+    //     let touchedCells = game.patternScan()
+
+
+    //     //if can't find patterns, calculate probability
+    // }
+
+    // patternScan() {
+    //     let touchedCells = []
+    //     touchedCells.push(game.oneCorner())
+    //     return touchedCells
+    // }
+
+    // oneCorner() {
+    //     let grid = this.getGrid()
+    // }
+
+    /*play() {
+        let grid = this.getGrid()
+        let blanks = grid.getBlanks();
+        let mines = grid.getMines();
+        let success = 0;
+
+        while (blanks > mines && success != GAMEEND) {
+            success = this.playNewMove(action, row, col)
+            if (success === GAMEEND) {
+                return GAMEEND
+            }
+        }
+        return WIN
+    }*/
+
+    //action can be right or left click
+     newMove(action, row, col, userGrid) {
+        let grid = userGrid.getGrid()
+        // console.log(grid.getBlanks())
+        // console.log(grid.getSize())
+        console.log(grid)
+        if (grid.getBlanks() === grid.getSize() * grid.getSize()) { //first move
+            this.safeFirstClick(row, col)
+            // this.grid.setAnswerGrid(this.safeFirstClick(row, col))
         }
 
         switch (action) {
@@ -45,7 +117,8 @@ class Game {
         }
         const object = {
             gameState: grid.getUserGrid(),
-            answerGrid: grid.getAnswerGrid()
+            answerGrid: grid.getAnswerGrid(),
+            game: userGrid
         }
 
         return object
@@ -56,12 +129,12 @@ class Game {
         let difficulty = grid.getDifficulty();
 
         //while first click is unsafe, keep generating new grids until it is safe
-        while (this.getAnswerGrid()[row][column] === MINE) {
-            let newGrid = new Grid(difficulty);
+        while (this.grid.getAnswerGrid()[row][column] === MINE) {
+            let newGrid = new UserGrid(difficulty);
             grid.setAnswerGrid(newGrid.getAnswerGrid());
         }
-        game.setGrid(grid)
-        return answerGrid
+        // this.setGrid(grid)
+        // return grid.getAnswerGrid()
     }
 
     //when # of blanks == minecount, we know the bombs are there so we can flag them
@@ -112,4 +185,4 @@ class Game {
 // //grid.click(0, 0)
 // console.log(game.fulfill(0, 0))
 // grid.printGrid("user")
-module.exports = Game
+module.exports = UserGame
