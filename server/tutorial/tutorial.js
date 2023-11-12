@@ -57,7 +57,7 @@ const step3 = {
     move: "chord",
     coords: [2, 4],
     description: "Based on determining the location of the previous 1’s mine, we can make a REDUCTION by comparing the second 1 with the former. The unshared cell between the 1s are clear, you can either click the cell or chord by clicking the second 1.",
-    bullets: ["Reduction (click to expand): Reductions are the reduction of cells that have 0% chance of holding a mine.", "Chording (click to expand): Chording means to clear the grid by clicking already satisfied numbers"]
+    bullets: ["Reduction: Reductions are the reduction of cells that have 0% chance of holding a mine.", "Chording: Chording means to clear the grid by clicking already satisfied numbers"]
 }
 
 const step4 = {
@@ -88,7 +88,7 @@ const step5 = {
     move: "flag",
     coords: [4, 5],
     description: "And look at that clear! Look for those diagonals again! Like this 2. As you gain more of the minesweeping eye you can choose to flag or play no flag at times based on what move will give you more information in the future. But for now I recommend you flag this cell for your next move.",
-    bullets: ["No flag (click to expand): No flag gameplay means to clear a grid without the usage of flagging which renders you unable to chord. However, you can click into areas which you deduce to big payoff."]
+    bullets: ["No flag: No flag gameplay means to clear a grid without the usage of flagging which renders you unable to chord. However, you can click into areas which you deduce to big payoff."]
 }
 
 const step6 = {
