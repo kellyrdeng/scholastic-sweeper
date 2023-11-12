@@ -7,10 +7,10 @@ import Header from "./components/Header";
 export default function App() {
 	return (
 		<div className="h-screen w-full text-base">
-			<Header/>
-      <BrowserRouter>
+			<Header />
+			<BrowserRouter>
 				<Routes>
-                    <Route path="/About" element={<About />} />
+					<Route path="/About" element={<About />} />
 					<Route path="/grid" element={<MineGrid />} />
 				</Routes>
 			</BrowserRouter>
