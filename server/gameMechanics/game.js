@@ -94,25 +94,30 @@ export default class Game {
         return WIN
     }*/
 
-    static playNewMove(action, row, col, userGrid, answerGrid) {
+    //action can be right or left click
+    static newMove(action, row, col, userGrid) {
         let grid = this.getGrid()
-        let userGrid = grid.getUserGrid()
-        let answerGrid = NULL
 
         if (userGrid.getBlanks() === grid.getSize() * grid.getSize()) { //first move
-            answerGrid = this.safeFirstClick(row, column)
+            grid.setAnswerGrid(this.safeFirstClick(row, col))
         }
 
         switch (action) {
-            case "click":
-                return grid.click(row, col);
-            case "flag":
-                return grid.flag(row, col);
-            case "chord":
-                return grid.chord(row, col);
-            default: //invalid input, out of bounds
-                return UNSUCCESS;
+            case "left":
+                grid.click(row, col)
+            case "right":
+                if (grid.getUserGrid()[row][col] === BLANK) {
+                    grid.flag(row, col)
+                } else { //is a number
+                    grid.chord(row, col)
+                }
         }
+        const object = {
+            gameState: grid.getUserGrid(),
+            answerGrid: grid.getAnswerGrid()
+        }
+
+        return object
     }
 
     safeFirstClick(row, column) {
@@ -162,18 +167,17 @@ export default class Game {
     }
 }
 
-let game = new Game("test") 
+// let game = new Game("test") 
+// let grid = new Grid("test") 
+// grid.setUserGrid([[1,       1,   BLANK], 
+//                   [1,     BLANK, BLANK],
+//                   [BLANK, BLANK, BLANK]])
+// grid.setAnswerGrid([[1,   1,  1], 
+//                     [1, MINE, 1],
+//                     [1,   1,  1]])
+// game.setGrid(grid)
 
-let grid = new Grid("test") 
-grid.setUserGrid([[1,       1,   BLANK], 
-                  [1,     BLANK, BLANK],
-                  [BLANK, BLANK, BLANK]])
-grid.setAnswerGrid([[1,   1,  1], 
-                    [1, MINE, 1],
-                    [1,   1,  1]])
-game.setGrid(grid)
-
-grid.printGrid("answer")
-//grid.click(0, 0)
-console.log(game.fulfill(0, 0))
-grid.printGrid("user")
+// grid.printGrid("answer")
+// //grid.click(0, 0)
+// console.log(game.fulfill(0, 0))
+// grid.printGrid("user")
