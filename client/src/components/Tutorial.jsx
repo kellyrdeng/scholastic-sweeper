@@ -11,7 +11,7 @@ export default function Tutorial({tutorialState, setTutorialState}) {
     setTutorialState({...tutorialState, currStep: currStep - 1})
   }
 
-  const hnadleForwardCLick = (event) => {
+  const handleForwardClick = (event) => {
     if(currStep >= tutorial.length - 1) return
     setTutorialState({...tutorialState, currStep: currStep + 1})
   }
@@ -23,7 +23,7 @@ export default function Tutorial({tutorialState, setTutorialState}) {
       <div className="controls text-black flex justify-around">
         <button className="bg-white" onClick={handleBackClick}>&larr;</button>
         <button className="bg-transparent text-white font-bold text-xl">{`${currStep + 1}/ ${tutorial.length}`}</button>
-        <button className="bg-white" onClick={hnadleForwardCLick}>&rarr;</button>
+        <button className="bg-white" onClick={handleForwardClick}>&rarr;</button>
       </div>
      </div>
       <div className=" w-5/12 bg-zinc-700 min-h-[8rem] flex flex-col justify-center items-center p-6 rounded-xl max-h-screen overflow-x-scroll gap-4">
