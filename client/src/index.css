@@ -95,6 +95,20 @@ button:focus-visible {
   font-size: 28px;
 }
 
+#hoz {
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#hoz figure {
+  background-color: #4c6479;
+  color: #fff;
+  font: italic smaller sans-serif;
+  padding: 3px;
+  text-align: center;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

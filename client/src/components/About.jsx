@@ -13,10 +13,16 @@ export default function About() {
 				Minesweeper.online, players have built a community around the game, encouraging and challenging 
 				each others’ skills. This game builds players’ <span class="em">pattern recognition, problem solving,</span> 
 				and <span class="em">logical skills</span>, all skills especially important to Computer Science. </p>
-				
-				<img src={old_sweep} classname="h-full w-full pt-8 ps-10"/>
-				<img src={new_sweep} classname="h-full w-full pt-8 ps-10"/>
-				
+				<div id="hoz">
+					<figure>
+						<img src={old_sweep} classname="h-full w-full pt-8 ps-10"/>
+						<figcaption>Ancient version.</figcaption>
+					</figure>
+					<figure>
+						<img src={new_sweep} classname="h-full w-full pt-8 ps-10"/>
+						<figcaption>Minesweeper Online's version.</figcaption>
+					</figure>
+				</div>
 				<p className ="font-mono leading-relaxed"> 
 				ScholasticSweeper is an educational minesweeper bot which provides step-by-step
 				tutorials to solving minesweeper grids for the purpose of learning. Players new
