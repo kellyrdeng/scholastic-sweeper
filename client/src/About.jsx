@@ -2,8 +2,8 @@ import React from "react";
 
 export default function About() {
 	return (
-		<div className="h-screen w-full text-base">
-			<main>
+		<div className="">
+			<main className="bg-white h-full">
 				<h1 className="content-center" >Welcome to ScholasticSweeper!</h1>
 				<p>
 				We are ScholasticSweeper, a student-created website that provides 
@@ -17,8 +17,7 @@ export default function About() {
 				grid with ten mines, with which you have the ability to flag, chord, and sweep! 
 				</p>
 			</main>
-			
-			
+
 		</div>
 	);
 }
