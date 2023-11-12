@@ -1,33 +1,37 @@
 import React from "react";
-import Header from "./Header";
-import Cell from "./Cell";
+import MineGrid from "./MineGrid";
 
-const testGrid = [
-	[-3, -3, 1, 0, 0, 0, 0, 0, 0],
-	[-3, -3, 3, 1, 1, 0, 0, 0, 0],
-	[-3, -3, 3, -1, 1, 0, 1, 1, 1],
-	[-2, 2, 2, 1, 2, 1, 2, -2, 1],
-	[2, 2, 0, 0, 1, -2, 2, 1, 1],
-	[-2, 1, 0, 1, 2, 2, 1, 0, 0],
-	[1, 1, 0, 1, -1, 1, 1, 1, 1],
-	[0, 0, 0, 1, 2, 2, 2, -1, 1],
-	[0, 0, 0, 0, 1, -2, 2, 1, 1],
-];
+export default function Tutorial({tutorialState, setTutorialState}) {
+  const tutorial = tutorialState.tutorial
+  let currStep = tutorialState.currStep
+  let currTutorial = tutorial[currStep]
+  console.log(currTutorial.coords)
+  const handleBackClick = (event) => {
+    if(currStep === 0) return
+    setTutorialState({...tutorialState, currStep: currStep - 1})
+  }
 
-export default function Tutorial() {
+  const hnadleForwardCLick = (event) => {
+    if(currStep >= tutorial.length - 1) return
+    setTutorialState({...tutorialState, currStep: currStep + 1})
+  }
+
 	return (
-		<div className="h-screen w-full text-base">
-			<main>
-				<div className="mine-sweeper-grid bg-[#D7D7D7] w-max h-max border-8">
-					{testGrid.map((row, rowIdx) => (
-						<div className="flex w-max ">
-							{row.map((cell, colIdx) => (
-								<Cell pos={[rowIdx, colIdx]} />
-							))}
-						</div>
-					))}
-				</div>
-			</main>
+		<div className="h-screen w-full text-base flex justify-around items-center gap-4">
+     <div className="flex flex-col gap-4">
+      <MineGrid grid={currTutorial.gameState} tutorialCell={currTutorial?.coords}/>
+      <div className="controls text-black flex justify-around">
+        <button className="bg-white" onClick={handleBackClick}>&larr;</button>
+        <button className="bg-transparent text-white font-bold text-xl">{`${currStep + 1}/ ${tutorial.length}`}</button>
+        <button className="bg-white" onClick={hnadleForwardCLick}>&rarr;</button>
+      </div>
+     </div>
+      <div className=" w-5/12 bg-zinc-700 min-h-[8rem] flex flex-col justify-center items-center p-6 rounded-xl max-h-screen overflow-x-scroll gap-4">
+        <p className="font-bold text-2xl leading-8">{currTutorial?.description}</p>
+        <ul className="list-disc w-11/12 gap-4 flex-col flex">
+          {currTutorial.bullets?.map(idea => <li className="text-base font-semibold leading-5">{idea}</li>)}
+        </ul>
+      </div>
 		</div>
 	);
 }

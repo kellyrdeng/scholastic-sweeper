@@ -10,7 +10,8 @@ const initial = {
                 [-3, -3, -3, -3, -3, -3, -3, -3, -3],
                 [-3, -3, -3, -3, -3, -3, -3, -3, -3],
                 [-3, -3, -3, -3, -3, -3, -3, -3, -3],
-                [-3, -3, -3, -3, -3, -3, -3, -3, -3]]
+                [-3, -3, -3, -3, -3, -3, -3, -3, -3]],
+    description: "Board initially starts as completely blank."
 }
 
 const step1 = {
@@ -391,7 +392,7 @@ const step25 = {
 }
 
 const answer = {
-    answer: [[ 1,  1,  1,  0,  0,  0,  0,  0,  0],
+    gameState: [[ 1,  1,  1,  0,  0,  0,  0,  0,  0],
              [ 2, -1,  3,  1,  1,  0,  0,  0,  0],
              [ 3, -1,  3, -1,  1,  0,  1,  1,  1],
              [-1,  2,  2,  1,  2,  1,  2, -1,  1],
@@ -399,11 +400,13 @@ const answer = {
              [-1,  1,  0,  1,  2,  2,  1,  0,  0],
              [ 1,  1,  0,  1, -1,  1,  1,  1,  1],
              [ 0,  0,  0,  1,  2,  2,  2, -1,  1],
-             [ 0,  0,  0,  0,  1, -1,  2,  1,  1]]
+             [ 0,  0,  0,  0,  1, -1,  2,  1,  1]],
+    description: "Now you are ready to play!!!"
 }
 
 const tutorial = {
     steps: [
+        initial,
         step1,
         step2,
         step3,
@@ -428,8 +431,10 @@ const tutorial = {
         step22,
         step23,
         step24,
-        step25
-    ]
+        step25,
+        answer
+    ],
+    answer: answer
 }
 
 module.exports = tutorial
