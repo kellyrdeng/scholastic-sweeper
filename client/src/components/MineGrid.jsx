@@ -1,6 +1,6 @@
 import React from "react";
 import Cell from "./Cell";
-export default function Grid() {
+export default function MineGrid() {
 
 
 const testGrid = [
@@ -16,9 +16,9 @@ const testGrid = [
 ]
 
  return (
-  <div className="mine-sweeper-grid bg-[#D7D7D7]">
+  <div className="mine-sweeper-grid bg-[#D7D7D7] w-max h-max">
    {testGrid.map((row, rowIdx) => (
-    <div className="flex w-max">
+    <div className="flex w-max ">
      {row.map((cell, colIdx)=> <Cell pos={[rowIdx, colIdx]}/>)}
     </div>
    ))}

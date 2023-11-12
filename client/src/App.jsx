@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Grid from "./components/Grid";
+import MineGrid from "./components/MineGrid";
 import Header from "./components/Header";
 
 export default function App() {
@@ -9,7 +9,7 @@ export default function App() {
 			<Header/>
       <BrowserRouter>
 				<Routes>
-					<Route path="/grid" element={<Grid />} />
+					<Route path="/grid" element={<MineGrid />} />
 				</Routes>
 			</BrowserRouter>
 		</div>
