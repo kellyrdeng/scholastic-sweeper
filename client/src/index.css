@@ -67,7 +67,7 @@ button:focus-visible {
 #main_header nav {
   display: flex;
   flex-direction: row;
-  justify-content: start;
+  justify-content: flex-start;
 }
 
 @media (prefers-color-scheme: light) {
@@ -81,8 +81,4 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
-}
-
-#About_Text h1 {
-  
 }
