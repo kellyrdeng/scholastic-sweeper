@@ -17,9 +17,9 @@ export default function App() {
   }, [])
 
   const [tutorialState, setTutorialState] = useState({
-    tutorial:  JSON.parse(localStorage.getItem("tutorial")).steps ?? [],
+    tutorial:  JSON.parse(localStorage.getItem("tutorial")?? "{}").steps ?? [],
     currStep: 0,
-    answer: JSON.parse(localStorage.getItem("tutorial")).answer ?? [],
+    answer: JSON.parse(localStorage.getItem("tutorial")?? "{}").answer ?? [],
   })
 
 	return (

@@ -15,8 +15,8 @@ export default function Play() {
 	}, []);
 
 	const [playState, setPlayState] = useState({
-		gameGrid: JSON.parse(localStorage.getItem("game")).userGrid ?? [],
-		answer: JSON.parse(localStorage.getItem("game")).answerGrid ?? [],
+		gameGrid: JSON.parse(localStorage.getItem("game") ?? "{}").userGrid ?? [],
+		answer: JSON.parse(localStorage.getItem("game") ?? "{}").answerGrid ?? [],
 	});
 
 	return (
