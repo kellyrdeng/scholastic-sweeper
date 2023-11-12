@@ -1,5 +1,6 @@
 /*This class starts a game and runs it until a mine is hit or all mines are found*/
-import Grid from './grid.js'
+
+const Grid = require("./grid.js")
 
 const MINE = -1 
 const FLAG = -2 
