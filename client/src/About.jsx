@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Grid from "./components/Grid";
 import Header from "./components/Header";
+import Grid from "./components/grid";
 
 export default function App() {
 	return (
