@@ -24,7 +24,7 @@ a {
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+  color: #4c6479;
 }
 
 body {
@@ -52,7 +52,7 @@ button {
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: #4c6479;
 }
 button:focus,
 button:focus-visible {
@@ -70,13 +70,38 @@ button:focus-visible {
   justify-content: flex-start;
 }
 
+#About_Main p {
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+}
+
+#About_Main {
+  width: 1000px;
+  margin: 0 auto;
+  font-size: 22px;
+}
+
+#logo {
+  max-width: 100%;
+  height: auto;
+  object-fit: fill;
+}
+
+.em {
+  color: #4c6479;
+  font-size: 28px;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
     background-color: #ffffff;
   }
   a:hover {
-    color: #747bff;
+    color: #4c6479;
   }
   button {
     background-color: #f9f9f9;
