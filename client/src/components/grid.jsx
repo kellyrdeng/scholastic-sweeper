@@ -14,5 +14,5 @@ export default function Grid() {
 	];
 
 
-  return <h1>Hi</h1>
+  return <h1>Hello</h1>
 }
