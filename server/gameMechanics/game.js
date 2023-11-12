@@ -15,9 +15,9 @@ const OFFSET = [[-1, -1], [-1, 0], [-1, 1], //for neighbors of a cell
                 [0,  -1],          [0,  1],
                 [1,  -1], [1,  0], [1,  1]] 
 
-export default class Game {
+class Game {
 
-    constructor(difficulty) { //initialize new game by prompting user for difficulty
+    constructor(difficulty = "beginner") { //initialize new game by prompting user for difficulty
         /*let difficulty = prompt("Type beginner, intermediate, or expert to select difficulty:")
         while (difficulty != "beginner"|| difficulty != "intermediate" || difficulty != "expert") {
             difficulty = prompt("Please type either beginner, intermediate, or expert.:")
@@ -181,3 +181,4 @@ export default class Game {
 // //grid.click(0, 0)
 // console.log(game.fulfill(0, 0))
 // grid.printGrid("user")
+module.exports = Game

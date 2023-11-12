@@ -4,6 +4,7 @@ import About from "./About";
 import Header from "./components/Header";
 import Tutorial from "./components/Tutorial";
 import axios from "axios";
+import Play from "./components/Play";
 
 export default function App() {
   useEffect(() => {
@@ -13,6 +14,7 @@ export default function App() {
     }
     fetchTutorial()
   }, [])
+
   const [tutorialState, setTutorialState] = useState({
     tutorial:  JSON.parse(localStorage.getItem("tutorial")).steps ?? [],
     currStep: 0,
@@ -26,7 +28,7 @@ export default function App() {
 				<Routes>
 					<Route path="/about" element={<About />} />
 					<Route path="/tutorial" element={<Tutorial tutorialState={tutorialState} setTutorialState={setTutorialState}/>} />
-					{/* <Route path="/play" element={<Play />} /> */}
+					<Route path="/play" element={<Play />} />
 				</Routes>
 			</BrowserRouter>
 		</div>

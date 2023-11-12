@@ -42,9 +42,10 @@ export default function Cell({ grid, pos, tutorialCell }) {
 	}
 
 	const handleClick = async (event) => {
+        event.preventDefault()
 		if (event.button === 0) {
 			//left button
-			await axios.post("http://localhost:3000/", {
+			await axios.post("http://localhost:3000/play", {
 				gameState: [],
 				answerGrid: [],
 				coords: [],
@@ -53,7 +54,7 @@ export default function Cell({ grid, pos, tutorialCell }) {
 		}
 		if (event.button === 2) {
 			//right button
-			await axios.post("http://localhost:3000/", {
+			await axios.post("http://localhost:3000/play", {
 				gameState: [],
 				answerGrid: [],
 				coords: [],
@@ -62,8 +63,9 @@ export default function Cell({ grid, pos, tutorialCell }) {
 		}
 	};
 
+
 	return (
-		<div className={"relative h-14 w-14"} onClick={handleClick}>
+		<div className={"relative h-14 w-14"} onClick={handleClick} onContextMenu={handleClick}>
 			{cell}
 		</div>
 	);

@@ -10,7 +10,7 @@ const OFFSET = [[-1, -1], [-1, 0], [-1, 1],
                 [0,  -1],          [0,  1],
                 [1,  -1], [1,  0], [1,  1]] 
 
-export default class Grid {
+class Grid {
 
     constructor(difficulty) {
         this.difficulty = difficulty
@@ -342,6 +342,8 @@ export default class Grid {
         return neighbors
     }
 }
+
+module.exports = Grid
 
 //let grid = new Grid("beginner") 
 //grid.printGrid("answer") 

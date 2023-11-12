@@ -2,7 +2,8 @@
 
 const express = require("express");
 const cors = require("cors");
-const tutorial = require("./tutorial/tutorial")
+const tutorial = require("./tutorial/tutorial");
+const Game = require("./gameMechanics/game");
 
 const PORT = process.env.PORT || 3000;
 
@@ -24,6 +25,10 @@ app.post("/", (req, res) => { //req sent from user to backend
 
 app.get("/tutorial", (req, res) => {
   res.status(200).json(tutorial)
+})
+
+app.post("/play", (req, res) => {
+  res.status(200).send(new Game())
 })
 
 app.get("/api", (req, res) => {
