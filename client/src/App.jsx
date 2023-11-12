@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import About from "./About";
 import Grid from "./components/Grid";
 import Header from "./components/Header";
 
@@ -10,6 +11,7 @@ export default function App() {
       <BrowserRouter>
 				<Routes>
 					<Route path="/grid" element={<Grid />} />
+                    <Route path="/About" element={<About />} />
 				</Routes>
 			</BrowserRouter>
 		</div>
