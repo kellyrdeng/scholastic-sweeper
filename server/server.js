@@ -1,8 +1,8 @@
 // server/index.js
 
 const express = require("express");
-const cors = require("cors")
-const steps = require("./tutorial/tutorial")
+const cors = require("cors");
+const { default: Tutorial } = require("../client/src/Tutorial");
 
 const PORT = process.env.PORT || 3000;
 
@@ -23,7 +23,7 @@ app.post("/", (req, res) => {
 })
 
 app.get("/tutorial", (req, res) => {
-  
+  res.status(200).json(Tutorial)
 })
 
 app.get("/api", (req, res) => {
