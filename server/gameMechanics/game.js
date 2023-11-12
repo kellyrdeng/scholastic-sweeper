@@ -1,5 +1,6 @@
 /*This class starts a game and runs it until a mine is hit or all mines are found*/
-import Grid from './grid.js'
+
+const Grid = require("./grid.js")
 
 const MINE = -1 
 const FLAG = -2 
@@ -8,6 +9,7 @@ const BLANK = -3
 const UNSUCCESS = -4 //out of bounds
 const SUCCESS = -5
 const GAMEEND = - 6
+const WIN = -7
 
 const OFFSET = [[-1, -1], [-1, 0], [-1, 1], //for neighbors of a cell
                 [0,  -1],          [0,  1],
@@ -77,24 +79,45 @@ export default class Game {
     //     let grid = this.getGrid()
     // }
 
-    playNewMove(action, row, col) {
+    /*play() {
         let grid = this.getGrid()
-        let userGrid = grid.getUserGrid()
+        let blanks = grid.getBlanks();
+        let mines = grid.getMines();
+        let success = 0;
+
+        while (blanks > mines && success != GAMEEND) {
+            success = this.playNewMove(action, row, col)
+            if (success === GAMEEND) {
+                return GAMEEND
+            }
+        }
+        return WIN
+    }*/
+
+    //action can be right or left click
+    static newMove(action, row, col, userGrid) {
+        let grid = this.getGrid()
 
         if (userGrid.getBlanks() === grid.getSize() * grid.getSize()) { //first move
-            this.safeFirstClick(row, column)
+            grid.setAnswerGrid(this.safeFirstClick(row, col))
         }
 
         switch (action) {
-            case "click":
-                return grid.click(row, col);
-            case "flag":
-                return grid.flag(row, col);
-            case "chord":
-                return grid.chord(row, col);
-            default: //invalid input, out of bounds
-                return UNSUCCESS;
+            case "left":
+                grid.click(row, col)
+            case "right":
+                if (grid.getUserGrid()[row][col] === BLANK) {
+                    grid.flag(row, col)
+                } else { //is a number
+                    grid.chord(row, col)
+                }
         }
+        const object = {
+            gameState: grid.getUserGrid(),
+            answerGrid: grid.getAnswerGrid()
+        }
+
+        return object
     }
 
     safeFirstClick(row, column) {
@@ -107,6 +130,7 @@ export default class Game {
             grid.setAnswerGrid(newGrid.getAnswerGrid());
         }
         game.setGrid(grid)
+        return answerGrid
     }
 
     //when # of blanks == minecount, we know the bombs are there so we can flag them
@@ -143,18 +167,17 @@ export default class Game {
     }
 }
 
-let game = new Game("test") 
+// let game = new Game("test") 
+// let grid = new Grid("test") 
+// grid.setUserGrid([[1,       1,   BLANK], 
+//                   [1,     BLANK, BLANK],
+//                   [BLANK, BLANK, BLANK]])
+// grid.setAnswerGrid([[1,   1,  1], 
+//                     [1, MINE, 1],
+//                     [1,   1,  1]])
+// game.setGrid(grid)
 
-let grid = new Grid("test") 
-grid.setUserGrid([[1,       1,   BLANK], 
-                  [1,     BLANK, BLANK],
-                  [BLANK, BLANK, BLANK]])
-grid.setAnswerGrid([[1,   1,  1], 
-                    [1, MINE, 1],
-                    [1,   1,  1]])
-game.setGrid(grid)
-
-grid.printGrid("answer")
-//grid.click(0, 0)
-console.log(game.fulfill(0, 0))
-grid.printGrid("user")
+// grid.printGrid("answer")
+// //grid.click(0, 0)
+// console.log(game.fulfill(0, 0))
+// grid.printGrid("user")
