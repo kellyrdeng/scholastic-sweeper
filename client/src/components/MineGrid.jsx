@@ -16,7 +16,7 @@ const testGrid = [
 ]
 
  return (
-  <div className="mine-sweeper-grid bg-[#D7D7D7] w-max h-max">
+  <div className="mine-sweeper-grid bg-[#D7D7D7] w-max h-max border-8">
    {testGrid.map((row, rowIdx) => (
     <div className="flex w-max ">
      {row.map((cell, colIdx)=> <Cell pos={[rowIdx, colIdx]}/>)}
