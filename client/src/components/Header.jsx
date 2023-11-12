@@ -4,10 +4,12 @@ export default function Header() {
   return (
     <div id="main_header" className="bg-stone-500 w-screen h-24">
         <nav id = "nav-set">
-            <a className="ps-8 w-4/12"><img src={logo}/></a> 
-            <a class="font-mono p-8 text-4xl" href="">About</a>
-            <a class="font-mono p-8 text-4xl" href="">Play</a> 
-            <a class="font-mono p-8 text-4xl" href="">Tutorial</a>
+            <a class="no-underline w-64 h-full" href="/">
+              <img className="h-full w-full" src={logo} />
+            </a>
+            <a class="font-mono ps-20 p-8 text-4xl" href="/about">About</a>
+            <a class="font-mono ps-20 p-8 text-4xl" href="/play">Play</a> 
+            <a class="font-mono ps-20 p-8 text-4xl" href="/tutorial">Tutorial</a>
         </nav>   
     
     </div>
