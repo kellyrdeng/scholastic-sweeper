@@ -6,7 +6,7 @@ export default function About() {
 	return (
 		<div>
 			<main id="About_Main"className="m-auto m-0" >
-				<h1 className="pt-8 content-center font-serif"><b>About ScholasticSweeper:</b></h1>
+				<h1 className="py-10 content-center font-serif"><b>About ScholasticSweeper:</b></h1>
 				<p className ="font-mono leading-relaxed">
 				<span class="em">Why the interest in Minesweeper?</span> A game originally created by Microsoft in the 90s, 
 				Minesweeper has accumulated a devoted and skilled following. Through online forums and
