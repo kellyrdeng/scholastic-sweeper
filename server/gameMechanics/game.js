@@ -8,6 +8,7 @@ const BLANK = -3
 const UNSUCCESS = -4 //out of bounds
 const SUCCESS = -5
 const GAMEEND = - 6
+const WIN = -7
 
 const OFFSET = [[-1, -1], [-1, 0], [-1, 1], //for neighbors of a cell
                 [0,  -1],          [0,  1],
@@ -77,12 +78,28 @@ export default class Game {
     //     let grid = this.getGrid()
     // }
 
-    playNewMove(action, row, col) {
+    /*play() {
+        let grid = this.getGrid()
+        let blanks = grid.getBlanks();
+        let mines = grid.getMines();
+        let success = 0;
+
+        while (blanks > mines && success != GAMEEND) {
+            success = this.playNewMove(action, row, col)
+            if (success === GAMEEND) {
+                return GAMEEND
+            }
+        }
+        return WIN
+    }*/
+
+    static playNewMove(action, row, col, userGrid, answerGrid) {
         let grid = this.getGrid()
         let userGrid = grid.getUserGrid()
+        let answerGrid = NULL
 
         if (userGrid.getBlanks() === grid.getSize() * grid.getSize()) { //first move
-            this.safeFirstClick(row, column)
+            answerGrid = this.safeFirstClick(row, column)
         }
 
         switch (action) {
@@ -107,6 +124,7 @@ export default class Game {
             grid.setAnswerGrid(newGrid.getAnswerGrid());
         }
         game.setGrid(grid)
+        return answerGrid
     }
 
     //when # of blanks == minecount, we know the bombs are there so we can flag them
